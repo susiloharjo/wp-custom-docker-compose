@@ -10,7 +10,7 @@ services:
        MYSQL_ROOT_PASSWORD: ${MYSQL_DATABASE_PASSWORD}
        MYSQL_DATABASE: wordpress
        MYSQL_USER: wordpress_db
-       MYSQL_PASSWORD: wordpress_db
+       MYSQL_PASSWORD: ${WORDPRESS_PASSWORD}
 
    wordpress:
      image: wordpress:latest
@@ -20,7 +20,7 @@ services:
      environment:
        WORDPRESS_DB_HOST: db:3306
        WORDPRESS_DB_USER: wordpress_db
-       WORDPRESS_DB_PASSWORD: wordpress_db
+       WORDPRESS_DB_PASSWORD: ${WORDPRESS_PASSWORD}
      volumes: 
        - /home/ubuntu/wptest/wp-content:/var/www/html/wp-content
        - /home/ubuntu/wptest/php.ini:/usr/local/etc/php/conf.d/custom.ini
