@@ -1,0 +1,29 @@
+version: '2'
+
+services:
+   db:
+     image: mysql:5.7
+     volumes:
+       - db_data:/var/lib/mysql
+     restart: always
+     environment:
+       MYSQL_ROOT_PASSWORD: ${MYSQL_DATABASE_PASSWORD}
+       MYSQL_DATABASE: wordpress
+       MYSQL_USER: wordpress_db
+       MYSQL_PASSWORD: wordpress_db
+
+   wordpress:
+     image: wordpress:latest
+     ports:
+       - 5500:80
+     restart: always
+     environment:
+       WORDPRESS_DB_HOST: db:3306
+       WORDPRESS_DB_USER: wordpress_db
+       WORDPRESS_DB_PASSWORD: wordpress_db
+     volumes: 
+       - /home/ubuntu/wptest/wp-content:/var/www/html/wp-content
+       - /home/ubuntu/wptest/php.ini:/usr/local/etc/php/conf.d/custom.ini
+
+volumes:
+    db_data:
